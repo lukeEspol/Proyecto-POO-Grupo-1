@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Para el extra
+import java.util.Comparator;
+
 // Clase central que gestiona todas las colecciones y la lógica de negocio.
 // Contiene las excepciones personalizadas como clases anidadas estáticas.
 
@@ -188,6 +191,19 @@ public class SistemaBiblioteca {
         return prestamosHistorico;
     }
 
+    // Extra 
+    // Retorna una lista de todos los usuarios, ordenados de mayor a menor
+    // según la cantidad de préstamos activos que tienen actualmente.
+    public List<Usuario> getUsuariosOrdenadosPorPrestamosActivos() {
+        // Creamos una copia de la lista de usuarios para no alterar el original
+        List<Usuario> usuariosOrdenados = new ArrayList<>(this.usuarios);
+        
+        // Comparacion
+        usuariosOrdenados.sort(
+            Comparator.comparingInt((Usuario u) -> u.getPrestamosActivos().size()).reversed());
+        
+        return usuariosOrdenados;
+    }
     // Retorna una lista de solo los préstamos que aún no han sido devueltos.
     public List<Prestamo> getPrestamosActivos() {
         return prestamosHistorico.stream()

@@ -100,6 +100,7 @@ public class Gestion_Biblioteca {
         System.out.println("(2) Listar todos los usuarios");
         System.out.println("(3) Reporte de préstamos activos");
         System.out.println("(4) Histórico de todos los préstamos");
+        System.out.println("(5) Reporte: Usuarios con más préstamos"); // Extra
         System.out.print("Seleccione una opción: ");
         
         try {
@@ -111,6 +112,7 @@ public class Gestion_Biblioteca {
                 case 2: listarUsuarios(sistema); break;
                 case 3: listarPrestamosActivos(sistema); break;
                 case 4: listarHistoricoPrestamos(sistema); break;
+                case 5: reporteUsuariosConMasPrestamos(sistema); break; // Extra
                 default: System.out.println("Opción no válida.");
             }
         } catch (java.util.InputMismatchException e) {
@@ -263,6 +265,32 @@ public class Gestion_Biblioteca {
             System.out.println(p);
         }
     }
+
+
+    // Metodo del Extra
+    // Muestra el reporte de usuarios ordenados por préstamos activos.
+    private static void reporteUsuariosConMasPrestamos(SistemaBiblioteca sistema) {
+        System.out.println("\n--- REPORTE: USUARIOS CON MÁS PRÉSTAMOS ACTIVOS ---");
+        List<Usuario> usuariosOrdenados = sistema.getUsuariosOrdenadosPorPrestamosActivos();
+
+        if (usuariosOrdenados.isEmpty()) {
+            System.out.println("No hay usuarios registrados.");
+            return;
+        }
+
+        System.out.println("(Ordenados de mayor a menor número de préstamos)");
+        int pos = 1;
+        for (Usuario u : usuariosOrdenados) {
+            System.out.printf("%d. [%d Préstamos] - %s (ID: %s, Tipo: %s)\n",
+                    pos++,
+                    u.getPrestamosActivos().size(),
+                    u.getNombre(),
+                    u.getId(),
+                    u.getTipoUsuario());
+        }
+    }
+
+
 
     // Imprime en consola todo el historial de préstamos (activos y devueltos).
     private static void listarHistoricoPrestamos(SistemaBiblioteca sistema) {
