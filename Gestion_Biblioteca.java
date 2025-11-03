@@ -12,7 +12,6 @@ public class Gestion_Biblioteca {
         
         // La clase Scanner para la entrada de datos
         Scanner sc = new Scanner(System.in);
-        // Instancia del sistema, que carga los datos de CSV al iniciar
         SistemaBiblioteca sistema = new SistemaBiblioteca();
         boolean salir = false;
 
